@@ -3,14 +3,17 @@
 #include <string>
 using namespace std;
 
+
 class Soldado{
 	public:
-		Soldado();
+		
 		
 		int getVida();
+		void setVida(int);
+		string getNombre();
 		int getFuerza();
-		virtual int Ataque() =0;
-		virtual int Defensa() =0;
+		virtual int Ataque(bool) =0;//true = asalto, false = soporte
+		virtual int Defensa(int, bool) =0;//true = asalto, false = soporte
 		
 	protected:
 		string nombre;
