@@ -292,6 +292,8 @@ int main(int argc, char** argv) {
 			}//fin case4
 			
 			case 5:{//cargar soldados
+				aliados.clear();
+				enemigos.clear();
 				//crear archivo
 				binFile = new ArchivoBin("Asalto.bin");
 				//abrir archivo
@@ -410,5 +412,12 @@ int main(int argc, char** argv) {
 		}
 	}//fin del while
 	
+	delete binFile;
+	for(int i = 0; i < aliados.size() ; i++){
+		delete aliados[i];
+	}
+	for(int i = 0; i < enemigos.size() ; i++){
+		delete enemigos[i];
+	}
 	return 0;
 }//fin del main
