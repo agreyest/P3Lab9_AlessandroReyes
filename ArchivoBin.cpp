@@ -36,7 +36,7 @@ vector<Soldado*> ArchivoBin::leerSoldado(int tip){
 	 	int blindaje=0;
 	 	int camuflaje=0;
 	 	
-		int tipo=-1;
+		int tipo=0;
 	 	inputFile.read(reinterpret_cast<char*>(&tipo),sizeof(int));
 	 	
 	 	
