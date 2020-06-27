@@ -1,11 +1,5 @@
 #include "Soldado.h"
 
-Soldado::Soldado(string pnombre, int pvida, int pfuerza){
-	nombre = pnombre;
-	vida = pvida;
-	fuerza = pfuerza;
-}
-
 int Soldado::getVida(){
 	return vida;
 }

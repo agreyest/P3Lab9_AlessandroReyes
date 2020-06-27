@@ -6,7 +6,7 @@ using namespace std;
 
 class Soldado{
 	public:
-		Soldado(string, int, int);
+		
 		
 		int getVida();
 		void setVida(int);
