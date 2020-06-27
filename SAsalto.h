@@ -15,6 +15,7 @@ class SAsalto: public Soldado{
 	protected:
 		int velocidad;
 		int fuerzaex;
+	friend class ArchivoBin;
 };
 
 #endif

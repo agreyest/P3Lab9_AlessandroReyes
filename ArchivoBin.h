@@ -1,6 +1,10 @@
 #ifndef ARCHIVOBIN_H
 #define ARCHIVOBIN_H
+
 #include "Soldado.h"
+#include "SAsalto.h"
+#include "SSoporte.h"
+#include <iostream>
 
 #include <fstream>
 using std::ofstream;
@@ -9,8 +13,14 @@ using std::ifstream;
 #include <string>
 using std::string;
 
+#include <stdlib.h>
+#include <time.h>
+#include <stdio.h>
+#include <conio.h>
 #include <vector>
-using std::vector;
+#include <string>
+#include <bits/stdc++.h>
+using namespace std;
 
 class ArchivoBin{
 	public:
@@ -19,8 +29,8 @@ class ArchivoBin{
 
 		virtual bool abrirEscritura(int);
 		virtual bool abrirLectura();
-		virtual vector<Soldado*> leerSoldado();
-		bool guardarSoldado(vector<Soldado*>);
+		vector<Soldado*> leerSoldado(int);
+		bool guardarSoldado(vector<Soldado*>, bool, int);
 		bool cerrarLectura();
 		bool cerrarEscritura();
 		

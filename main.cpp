@@ -265,21 +265,25 @@ int main(int argc, char** argv) {
 			}//fin case3
 			
 			case 4:{//guardar soldados
-				//crear archivo
-				binFile = new ArchivoBin("Soldados.bin");
+				//crear archivo asalto
+				binFile = new ArchivoBin("Asalto.bin");
 				//abrir archivo
 				binFile->abrirEscritura(0);
 				//guardar
-				binFile->guardarSoldado(aliados);
+				binFile->guardarSoldado(aliados, true, 1);
+				binFile->guardarSoldado(enemigos, true, 2);
 				//cerrar
 				binFile->cerrarEscritura();
 				
-				//crear archivo
-				binFile = new ArchivoBin("Soldados.bin");
+				
+				
+				//crear archivo soporte
+				binFile = new ArchivoBin("Soporte.bin");
 				//abrir archivo
-				binFile->abrirEscritura(1);
+				binFile->abrirEscritura(0);
 				//guardar
-				binFile->guardarSoldado(enemigos);
+				binFile->guardarSoldado(aliados, false, 1);
+				binFile->guardarSoldado(enemigos, false, 2);
 				//cerrar
 				binFile->cerrarEscritura();
 		
@@ -289,20 +293,22 @@ int main(int argc, char** argv) {
 			
 			case 5:{//cargar soldados
 				//crear archivo
-				binFile = new ArchivoBin("Soldados.bin");
+				binFile = new ArchivoBin("Asalto.bin");
 				//abrir archivo
 				binFile->abrirLectura();
 				//cargar
-				aliados = binFile->leerSoldado();
+				aliados = binFile->leerSoldado(1);
+				enemigos = binFile->leerSoldado(2);
 				//cerrar
 				binFile->cerrarLectura();
 				
 				//crear archivo
-				binFile = new ArchivoBin("Soldados.bin");
+				binFile = new ArchivoBin("Soporte.bin");
 				//abrir archivo
 				binFile->abrirLectura();
 				//cargar
-				enemigos = binFile->leerSoldado();
+				enemigos = binFile->leerSoldado(2);
+				aliados = binFile->leerSoldado(1);
 				//cerrar
 				binFile->cerrarLectura();
 				break;

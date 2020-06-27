@@ -15,6 +15,7 @@ class SSoporte : public Soldado {
 	protected:
 		int blindaje;
 		int camuflaje;
+	friend class ArchivoBin;
 };
 
 #endif
