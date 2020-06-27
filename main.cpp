@@ -11,7 +11,8 @@ using namespace std;
 #include "Soldado.h"
 #include "SAsalto.h"
 #include "SSoporte.h"
-//#include "ArchivoBin.h"
+#include "ArchivoBin.h"
+
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 int menu1(){
@@ -45,6 +46,7 @@ int menu1(){
 int main(int argc, char** argv) {
 	vector<Soldado*> aliados;
 	vector<Soldado*> enemigos;
+	ArchivoBin* binFile;
 	
 	int  opcion = menu1();
 	int seguir = 1;
@@ -263,12 +265,46 @@ int main(int argc, char** argv) {
 			}//fin case3
 			
 			case 4:{//guardar soldados
+				//crear archivo
+				binFile = new ArchivoBin("Soldados.bin");
+				//abrir archivo
+				binFile->abrirEscritura(0);
+				//guardar
+				binFile->guardarSoldado(aliados);
+				//cerrar
+				binFile->cerrarEscritura();
 				
+				//crear archivo
+				binFile = new ArchivoBin("Soldados.bin");
+				//abrir archivo
+				binFile->abrirEscritura(1);
+				//guardar
+				binFile->guardarSoldado(enemigos);
+				//cerrar
+				binFile->cerrarEscritura();
+		
+		
 				break;
 			}//fin case4
 			
 			case 5:{//cargar soldados
+				//crear archivo
+				binFile = new ArchivoBin("Soldados.bin");
+				//abrir archivo
+				binFile->abrirLectura();
+				//cargar
+				aliados = binFile->leerSoldado();
+				//cerrar
+				binFile->cerrarLectura();
 				
+				//crear archivo
+				binFile = new ArchivoBin("Soldados.bin");
+				//abrir archivo
+				binFile->abrirLectura();
+				//cargar
+				enemigos = binFile->leerSoldado();
+				//cerrar
+				binFile->cerrarLectura();
 				break;
 			}//fin case5
 			

@@ -20,11 +20,11 @@ class ArchivoBin{
 		virtual bool abrirEscritura(int);
 		virtual bool abrirLectura();
 		virtual vector<Soldado*> leerSoldado();
-		bool guardarSoldado(Soldado*){
+		bool guardarSoldado(vector<Soldado*>);
 		bool cerrarLectura();
 		bool cerrarEscritura();
 		
-		~ArchivoBin();
+		
 	protected:
 		string fileName;
 		ofstream outputFile;

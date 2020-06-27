@@ -23,45 +23,50 @@ bool ArchivoBin::abrirEscritura(int modo){
 }
 
 
-vector<Persona*> ArchivoBin::leerSoldado(){
-	 vector<Persona*> retValue;
+vector<Soldado*> ArchivoBin::leerSoldado(){
+	 vector<Soldado*> retValue;
 	 
 	 
 	 while(!inputFile.eof()){
 	 	int nameSize=0;
-	 	int edad=0; 
+	 	int vida=0; 
+	 	
 	 	
 	 	//leer el tamaño del nombre 
 	 	inputFile.read(reinterpret_cast<char*>(&nameSize),sizeof(int));
-	 	
-	 	char buffer[100];
-	 	//leer el nombre
-	 	inputFile.read(buffer,nameSize);
-	 	
+		 	
+		char buffer[100];
+		//leer el nombre
+		inputFile.read(buffer,nameSize);
+		 	
 	 	string nombre = buffer;
+		 	
+		//leer la edad
+		inputFile.read(reinterpret_cast<char*>(&vida),sizeof(int));
+		 	
+		retValue.push_back(new Soldado(nombre,vida, 150));
+		 
 	 	
-	 	//leer la edad
-	 	inputFile.read(reinterpret_cast<char*>(&edad),sizeof(int));
-	 	
-	 	retValue.push_back(new Persona(nombre,edad));
 	 	
 	 }
 	 
 	 return retValue; 
 }
 
-bool ArchivoBin::guardarSoldado(Soldado* soldados){
+bool ArchivoBin::guardarSoldado(vector<Soldado*> soldados){
  	if(outputFile.is_open()){
+ 		for(int i = 0; i < soldados.size(); i++){
+ 			int sizeNombre = soldados[i]->nombre.size();
+	 		//guardar size nombre
+	 		outputFile.write(reinterpret_cast<char*>(&sizeNombre), (int)sizeof(int) );
+	 		
+			//guardar el nombre 
+			outputFile.write(persona->nombre.data(),sizeNombre);
+			
+			//guardar vida
+	 		outputFile.write(reinterpret_cast<char*>(&soldados[i]->vida), (int)sizeof(int) );
+		 }
  		
- 		int sizeNombre = persona->nombre.size();
- 		//guardar size nombre
- 		outputFile.write(reinterpret_cast<char*>(&sizeNombre), (int)sizeof(int) );
- 		
-		//guardar el nombre 
-		outputFile.write(persona->nombre.data(),sizeNombre);
-		
-		//guardar edad
- 		outputFile.write(reinterpret_cast<char*>(&persona->edad), (int)sizeof(int) );
 				
 		return true;
 	}else
@@ -79,6 +84,3 @@ bool ArchivoBin::cerrarLectura(){
 }
 
 
-ArchivoBin::~ArchivoBin(){
-	
-}
